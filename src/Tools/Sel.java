@@ -8,7 +8,7 @@ import static Tools.Math_Tools.*;
 public class Sel {
 
     private Sel(){};
-
+    //shows k's
     public static void showKs(ArrayList<Matrix> Ks){
         for (int i = 0; i < Ks.size() ; i++) {
             System.out.println("K del elemento"+(i+1));
@@ -16,7 +16,7 @@ public class Sel {
             System.out.println("**********************************");
         }
     }
-
+    //shows b's
     public static void showbs(ArrayList<Vector> bs){
         for (int i = 0; i < bs.size() ; i++) {
             System.out.println("b del elemento"+(i+1));
@@ -49,11 +49,11 @@ public class Sel {
 
         return D;
     }
-
+    //returns the magnitude of the vector
     public static float calculateMagnitude(float v1, float v2){
         return (float) Math.sqrt(Math.pow(v1,2)+Math.pow(v2,2));
     }
-
+    //calculate locals Area
     public static float calculateLocalArea(int i, Mesh m){
         float A,s,a,b,c;
         Element e = m.getElement(i);
@@ -172,7 +172,7 @@ public class Sel {
 
         return J;
     }
-
+ // modificar
     public static Vector createLocalb(int element,Mesh m){
         Vector b = new Vector();
 
@@ -187,14 +187,14 @@ public class Sel {
 
         return b;
     }
-
+    //creates the local system for K and b
     public static void crearSistemasLocales(Mesh m, ArrayList<Matrix> localKs, ArrayList<Vector> localbs){
         for(int i = 0; i<m.getSize(Sizes.ELEMENTS.ordinal()); i++){
             localKs.add(createLocalK(i,m));
             localbs.add(createLocalb(i,m));
         }
     }
-
+    //assembles k matrix
     public static void assemblyK(Element e, Matrix localK, Matrix K){
         int index1 = e.getNode1() - 1;
         int index2 = e.getNode2() - 1;
@@ -216,10 +216,10 @@ public class Sel {
         K.get(index4).set(index1, K.get(index4).get(index1) + localK.get(3).get(0));
         K.get(index4).set(index2, K.get(index4).get(index2) + localK.get(3).get(1));
         K.get(index4).set(index3, K.get(index4).get(index3) + localK.get(3).get(2));
-        K.get(index4).set(index4, K.get(index4).get(index4) + localK.get(2).get(3));
+        K.get(index4).set(index4, K.get(index4).get(index4) + localK.get(3).get(3));
 
     }
-
+    //assembles b
     public static void assemblyb(Element e, Vector localb, Vector b){
         int index1 = e.getNode1() - 1;
         int index2 = e.getNode2() - 1;
@@ -239,14 +239,14 @@ public class Sel {
             assemblyb(e,localbs.get(i),b);
         }
     }
-
+    //nuemann method
     public static void applyNeumann(Mesh m,Vector b){
         for(int i=0;i <m.getSize(Sizes.NEUMANN.ordinal()); i++){
             Condition c = m.getCondition(i,Sizes.NEUMANN);
             b.set(c.getNode1()-1, b.get(c.getNode1()-1) + c.getValue());
         }
     }
-
+    //dirichlet method
     public static void applyDirichlet(Mesh m,Matrix K,Vector b){
         for(int i=0; i<m.getSize(Sizes.DIRICHLET.ordinal()); i++){
 
@@ -263,7 +263,7 @@ public class Sel {
             }
         }
     }
-
+    //methods calculates results
     public static void calculate(Matrix K, Vector b, Vector T){
         System.out.println("Iniciando calculo de respuesta...");
         Matrix Kinv = new Matrix();

@@ -4,6 +4,7 @@ import Enums.*;
 import static Enums.Sizes.*;
 
 public class Mesh {
+    //variables globales
     float parameters[] = new float[6];
     int sizes[] = new int [4];
     int indices_dirich[];
@@ -15,6 +16,7 @@ public class Mesh {
     public Mesh(){
     };
 
+    //setters
     public void setParameters(float k, float Q){
         parameters[Parameters.THERMAL_CONDUCTIVITY.ordinal()] = k;
         parameters[Parameters.HEAT_SOURCE.ordinal()] = Q;
@@ -26,7 +28,7 @@ public class Mesh {
         sizes[DIRICHLET.ordinal()]=ndirich;
         sizes[NEUMANN.ordinal()]=nneu;
     }
-
+    
     public int getSize(int s){
         return sizes[s];
     }
@@ -43,7 +45,7 @@ public class Mesh {
         neumann_list = Condition.createConditions(sizes[NEUMANN.ordinal()]);
 
     }
-
+    //getters
     public int[] getDirichletIndices() {
         return indices_dirich;
     }
@@ -51,9 +53,17 @@ public class Mesh {
     public Node[] getNodes() {
         return node_list;
     }
+    
+    public Node getNode(int i){
+        return node_list[i];
+    }
 
     public Element[] getElements() {
         return element_list;
+    }
+    
+    public Element getElement(int i){
+        return element_list[i];
     }
 
     public Condition[] getDirichlet(){
@@ -62,14 +72,6 @@ public class Mesh {
 
     public Condition[] getNeumann(){
         return neumann_list;
-    }
-
-    public Node getNode(int i){
-        return node_list[i];
-    }
-
-    public Element getElement(int i){
-        return element_list[i];
     }
 
     public Condition getCondition(int i, Sizes type){

@@ -13,6 +13,8 @@ import static Enums.Lines.*;
 import static Enums.Modes.*;
 
 public class Tools {
+    
+    //reads data
     public static void obtenerDatos(BufferedReader file, Lines nlines, int n, Modes mode, Item[] itemList) throws IOException {
         String line;
         line = file.readLine();
@@ -77,7 +79,7 @@ public class Tools {
         String newFilename = filename + extension;
         return newFilename;
     }
-
+    //readd data from bat file, to be processed
     public static void leerMallayCondiciones(Mesh m, String filename){
         String inputfilename, line;
         String[] values;
@@ -117,7 +119,7 @@ public class Tools {
             correctConditions(ndirich, m.getDirichlet(), m.getDirichletIndices());
 
         } catch (IOException ex){
-            System.out.println("Hubo un error al leer el archivo...\n"+ex.getMessage()+"\nSaliendo del programa");
+            System.out.println("Hubo un error al leer el archivo...\n"+ex.getMessage()+"\nSaliendo");
             System.exit(1);
         }
     }
@@ -128,7 +130,7 @@ public class Tools {
         }
         return false;
     }
-
+    //Method writes the results into a file
     public static void writeResults(Mesh m, Vector T, String filename){
         String outputfilename;
         int[] dirichlet_indices = m.getDirichletIndices();
@@ -158,7 +160,7 @@ public class Tools {
             file.write("End values\n");
 
         } catch (IOException ex){
-            System.out.println("Hubo un error al escribir el archivo...\nSaliendo del programa");
+            System.out.println("Error al escribir el archivo...\nSaliendo");
             System.exit(1);
         }
 

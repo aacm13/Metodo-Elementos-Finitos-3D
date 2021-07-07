@@ -20,7 +20,7 @@ public class Math_Tools {
             v.add(0f);
         }
     }
-    
+    //method makes a copy of matrix
     public static void copyMatrix(Matrix A, Matrix copy){
         zeroes(copy, A.size());
         for (int i = 0; i < A.size(); i++) {
@@ -37,7 +37,7 @@ public class Math_Tools {
         }
         return member;
     }
-
+    //returns the product of matrix A and B
     public static Matrix productMatrixMatrix(Matrix A, Matrix B, int n, int r, int m){
         Matrix R = new Matrix(n,m,0);
 
@@ -48,7 +48,7 @@ public class Math_Tools {
         }
         return R;
     }
-
+    //product of Matrix A with Vector V
     public static void productMatrixVector(Matrix A, Vector v, Vector R){
         for (int i = 0; i < A.size(); i++) {
             float cell = 0;
@@ -75,7 +75,7 @@ public class Math_Tools {
             M.get(k).remove(j);
         }
     }
-
+    //Determinant of Matrix
     public static float determinant(Matrix M){
         if(M.size() == 1) return M.get(0).get(0);
         else{
@@ -89,7 +89,7 @@ public class Math_Tools {
             return det;
         }
     }
-
+    //Cofactors fo Matrix
     public static void cofactors(Matrix M, Matrix Cof){
         zeroes(Cof, M.size());
         for (int i = 0; i < M.size(); i++) {
@@ -101,7 +101,7 @@ public class Math_Tools {
             }
         }
     }
-
+    //Transposed Matrix
     public static void transpose(Matrix M, Matrix T){
         zeroes(T, M.get(0).size(), M.size());
         for (int i = 0; i < M.size(); i++) {
@@ -110,7 +110,7 @@ public class Math_Tools {
             }
         }
     }
-
+    //Inverse of Matrix
     public static void inverseMatrix(Matrix M, Matrix Minv){
         System.out.println("Iniciando Calculo de inversa ....");
         Matrix Cof = new Matrix(), Adj = new Matrix();
